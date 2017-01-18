@@ -1,14 +1,8 @@
 package common;
 
 public class Player {
-<<<<<<< Updated upstream
 	public static enum Color {BLANC, NOIR};
-=======
-	public enum Color {
-		BLANC, NOIR
-	};
-
->>>>>>> Stashed changes
+	
 	private String name;
 	private Color color;
 
@@ -27,7 +21,4 @@ public class Player {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-
-	// test
-
 }

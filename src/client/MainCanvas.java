@@ -39,4 +39,12 @@ public class MainCanvas extends JFrame {
 		setContentPane(contentPane);
 	}
 
+	@Override
+	protected void paintComponent(Graphics g) { // ajout Q
+		super.paintComponent(g);
+		g.setColor(Color.RED);
+		for (int i=0; i<getWidth()/2; i+=10) {
+			g.drawOval(i,  i, getWidth()-i , getHeight()-i);
+		}
+	} // ajout Q
 }
