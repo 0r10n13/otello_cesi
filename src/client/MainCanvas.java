@@ -14,7 +14,7 @@ public class MainCanvas extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void Init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
