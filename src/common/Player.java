@@ -1,7 +1,7 @@
 package common;
 
 public class Player {
-	public enum Color {BLANC, NOIR};
+	public static enum Color {BLANC, NOIR};
 	private String name;
 	private Color color;
 	public String getName() {
