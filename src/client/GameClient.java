@@ -29,4 +29,9 @@ public class GameClient {
 			e.printStackTrace();
 		}
 	}
+	
+	public void InitMain()
+	{
+		
+	}
 }
