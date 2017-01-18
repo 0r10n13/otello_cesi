@@ -12,11 +12,15 @@ import common.Player;
 import common.TooManyPlayersException;
 import common.UserExistsException;
 
+<<<<<<< Updated upstream
 public class Game implements IGameNetwork {
 	List<Player> players = new ArrayList<Player>();
 	Pion board[][] = new Pion[8][8];
 	@Override
 	public Player addPlayer(Player newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
+=======
+	public void addPlayer(String name) throws RemoteException {
+>>>>>>> Stashed changes
 		// TODO Auto-generated method stub
 		boolean isExists = false;
 		if (players.size() > 2)
@@ -57,23 +61,33 @@ public class Game implements IGameNetwork {
 		return null;
 		// TEST DE QUENTIN
 	}
+<<<<<<< Updated upstream
 	
 	public static void main(String[] args)
 	{
 		try
 		{
+=======
+
+	public void main(String[] args) {
+		try {
+>>>>>>> Stashed changes
 			Game obj = new Game();
 			Game stub = (Game) UnicastRemoteObject.exportObject(obj, 0);
 			// Bind the remote object's stub in the registry
 			Registry registry = LocateRegistry.getRegistry();
 			registry.rebind("Othello", stub);
 			System.err.println("Server ready");
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			System.err.println("Server exception: " + e.toString());
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void addPlayer() throws RemoteException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
