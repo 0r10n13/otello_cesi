@@ -1,5 +1,6 @@
 package server;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -43,6 +44,7 @@ public class Game implements IGameNetwork {
 					newPlayer.setColor(Player.Color.NOIR);
 			}
 			players.add(newPlayer);
+			System.out.println("added : "+newPlayer.getName());
 			return newPlayer;
 		}
 		else
@@ -63,7 +65,7 @@ public class Game implements IGameNetwork {
 		try
 		{
 			Game obj = new Game();
-			Game stub = (Game) UnicastRemoteObject.exportObject(obj, 0);
+			Remote stub =  UnicastRemoteObject.exportObject(obj, 0);
 			// Bind the remote object's stub in the registry
 			Registry registry = LocateRegistry.getRegistry();
 			registry.rebind("Othello", stub);
