@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 public class GameClient {
 
-	private MainCanvas canvas;
+	private JClientFrame canvas;
 
 	public static void main(String[] args) {
 
 		// affichage de l'interface
-		GameClient gClient = new GameClient();
-		gClient.InitMain();
+		JClientFrame canvas = new JClientFrame();
+		canvas.setVisible(true);
 
-		try {
+		/*try {
 			String url = "rmi://10.176.130.24/Othello";
 			server.Game stub = (server.Game) Naming.lookup(url);
 			Scanner s = new Scanner(System.in);
@@ -27,6 +27,6 @@ public class GameClient {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
