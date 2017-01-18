@@ -17,6 +17,7 @@ public class Game implements IGameNetwork {
 	public String[][] getBoardState() throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
+		// TEST DE QUENTIN
 	}
 	
 	public void main(String[] args)
