@@ -29,6 +29,7 @@ public class GameClient {
 	public void InitMain() {
 		connectFrame = new Connexionpage(this);
 		connectFrame.setVisible(true);
+		
 //TEST INTERFACAGE
 		//setUrl("rmi://10.176.128.139/Othello");
 		//SetPlayerName("toto");
