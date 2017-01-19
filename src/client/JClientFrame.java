@@ -129,17 +129,16 @@ public class JClientFrame extends JFrame {
 	}*/
 
 	
-	public void yourTurn() throws RemoteException {
-		//getOthelloPanel().setEnabled(true);
-		setTitle("Mon tour de jouer");
+	public void Toggle(boolean etat) throws RemoteException {
+		if (etat==true){
+			getOthelloPanel().setEnabled(true);
+			setTitle("Mon tour de jouer");
+		}
+		else{
+			getOthelloPanel().setEnabled(false);
+			setTitle("Tour de l'autre de jouer");
+		}
 	}
-
-	
-	public void otherTurn() throws RemoteException {
-		//getOthelloPanel().setEnabled(false);
-		setTitle("Tour de l'autre de jouer");
-	}
-
 	public void setServer(IGameNetwork stub) {
 		panel.setServer(stub);
 		internRefreshBoard();
