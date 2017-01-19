@@ -15,6 +15,7 @@ import java.rmi.RemoteException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import common.CouleurPion;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Circle;
 import server.IGameNetwork;
@@ -87,7 +88,7 @@ public class JOthelloPanel extends JPanel{
 			for (int x= 0; x < 8 ; x++) {
 				for (int y = 0; y < 8; y++) {
 					System.out.printf("In for paintComponent");
-					String[][] color = server.getBoardState();
+					CouleurPion[][] color = server.getBoardState();
 					if (color != null) {
 						Rectangle r = getCellCoords(x, y);
 						//Car
