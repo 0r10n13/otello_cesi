@@ -43,13 +43,10 @@ public class MainCanvas extends JFrame {
 //	protected void paintComponent(Graphics g) { // ajout Q
 //		super.paintComponent(g);
 //		g.setColor(Color.RED);
-<<<<<<< HEAD
 //		for (int i = 0; i < getWidth() / 2; i += 10) {
 //			g.drawOval(i, i, getWidth() - i, getHeight() - i);
-=======
 //		for (int i=0; i<getWidth()/2; i+=10) {
 //			g.drawOval(i,  i, getWidth()-i , getHeight()-i);
->>>>>>> ihmalex
 //		}
 //	} // ajout Q
 }
