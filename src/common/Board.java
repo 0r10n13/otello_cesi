@@ -1,5 +1,6 @@
 package common;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class Board {
@@ -15,7 +16,7 @@ public class Board {
 		for (int i = 0; i < 4; i++) {
 			Pion pion = new Pion();
 			if (i < 2) {
-				pion.setPlayer((PlayerImpl) players.get(0));
+				pion.setPlayer(players.get(0));
 				if (i == 1) {
 					board[3][3] = pion;
 				} else {
@@ -23,7 +24,7 @@ public class Board {
 				}
 
 			} else {
-				pion.setPlayer((PlayerImpl) players.get(1));
+				pion.setPlayer(players.get(1));
 				if (i == 3) {
 					board[4][3] = pion;
 				} else {
@@ -33,7 +34,7 @@ public class Board {
 		}
 	}
 
-	public CouleurPion[][] GetBoardState() {
+	public CouleurPion[][] GetBoardState() throws RemoteException {
 
 		CouleurPion[][] result = new CouleurPion[8][8];
 

@@ -52,7 +52,7 @@ public class NamePage extends JFrame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		this.setBounds(100, 100, 450, 300);
+		//this.setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
@@ -81,6 +81,10 @@ public class NamePage extends JFrame{
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gameClient.SetPlayerName(textField2.getText());
+				JClientFrame canvas=new JClientFrame();
+				canvas.setServer(gameClient.getServer());
+				canvas.setVisible(true);
+				NamePage.this.dispose();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

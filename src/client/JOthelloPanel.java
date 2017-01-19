@@ -89,10 +89,10 @@ public class JOthelloPanel extends JPanel{
 				return;
 			}
 			CouleurPion[][] color = server.getBoardState();
-			color[2][3]=CouleurPion.NOIR;
+			//color[2][3]=CouleurPion.NOIR;
 			for (int x= 0; x < 8 ; x++) {
 				for (int y = 0; y < 8; y++) {
-					System.out.printf("In for paintComponent");
+					System.out.printf("In for paintComponent\n");
 					
 					if (color[x][y] != null) {
 						Rectangle r = getCellCoords(x, y);

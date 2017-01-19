@@ -13,7 +13,7 @@ import common.UserExistsException;
 
 public class GameClient {
 
-	private JClientFrame canvas;
+
 	private Connection connect;
 	private PlayerImpl player;
 	private Connexionpage connectFrame;
@@ -49,9 +49,7 @@ public class GameClient {
 		connect = new Connection();
 		try {
 			connect.Connect(url);
-			canvas=new JClientFrame();
-			canvas.setServer(connect.getStub());
-			canvas.setVisible(true);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,5 +74,9 @@ public class GameClient {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+
+	public IGameNetwork getServer() {
+		return connect.getStub();
 	}
 }
