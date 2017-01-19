@@ -11,22 +11,13 @@ public class JClientFrame extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	
-	/**
-	 * Create the frame.
-	 */
 	public JClientFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 816, 558);
 		contentPane = new JOP();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-	//	setContentPane(new JOP());
-
-	}
-	
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		//setContentPane(contentPane);
+		setContentPane(new JOP());
+	}	
 }
