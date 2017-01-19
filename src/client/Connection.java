@@ -16,6 +16,7 @@ public class Connection {
 	public void Connect(String url) {
 
 		try {
+			url = "rmi://"+url+"/Othello";
 			stub = (IGameNetwork) Naming.lookup(url);
 
 			// Scanner s = new Scanner(System.in);

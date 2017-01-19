@@ -1,49 +1,31 @@
 package client;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.GridBagLayout;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-
 import java.awt.GridBagConstraints;
-
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
 import java.awt.Insets;
-import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import javax.swing.JScrollPane;
 
 public class Connexionpage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	GameClient gameClient;
 
 	/**
 	 * Create the frame.
 	 * @param userService 
 	 */
-	public Connexionpage() {
-		//userService=userService_p;
+	public Connexionpage(GameClient gameClient) {
+		this.gameClient = gameClient;
 		addWindowListener(new WindowAdapter() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			@Override
@@ -81,7 +63,16 @@ public class Connexionpage extends JFrame {
 		JButton btnAjouter = new JButton("Connecter");
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nouveau=getTextField().getText();
+				String ipToConnect=getTextField().getText();
+				try {
+					gameClient.setUrl(ipToConnect);
+					gameClient.displayAddPlayer();
+				}
+				catch(Exception e1)
+				{
+					System.out.println(e1.getMessage());
+				}
+				
 			}
 		});
 		GridBagConstraints gbc_btnAjouter = new GridBagConstraints();

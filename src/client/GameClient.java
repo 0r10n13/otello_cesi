@@ -16,6 +16,8 @@ public class GameClient {
 	private MainCanvas canvas;
 	private Connection connect;
 	private PlayerImpl player;
+	private Connexionpage connectFrame;
+	private NamePage nameFrame;
 
 	public static void main(String[] args) {
 		// affichage de l'interface
@@ -24,12 +26,20 @@ public class GameClient {
 	}
 
 	public void InitMain() {
-		Connexionpage frame = new Connexionpage();
-		frame.setVisible(true);
+		connectFrame = new Connexionpage(this);
+		connectFrame.setVisible(true);
 //TEST INTERFACAGE
-		setUrl("rmi://10.176.128.143/Othello");
-		SetPlayerName("toto");
+		//setUrl("rmi://10.176.128.139/Othello");
+		//SetPlayerName("toto");
 
+	}
+	
+	public void displayAddPlayer()
+	{
+		connectFrame.setVisible(false);
+		connectFrame.dispose();
+		nameFrame = new NamePage();
+		nameFrame.setVisible(true);
 	}
 
 	public void setUrl(String url) {
