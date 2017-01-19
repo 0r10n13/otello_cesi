@@ -8,23 +8,24 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.IPlayer;
 import common.Pion;
-import common.Player;
+import common.PlayerImpl;
 import common.TooManyPlayersException;
 import common.UserExistsException;
 
 public class Game implements IGameNetwork {
-	List<Player> players = new ArrayList<Player>();
+	List<IPlayer> players = new ArrayList<IPlayer>();
 	Pion board[][] = new Pion[8][8];
 	@Override
-	public Player addPlayer(Player newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
+	public IPlayer addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
 		// TODO Auto-generated method stub
 		boolean isExists = false;
 		if (players.size() > 2)
 		{
 			throw new TooManyPlayersException("Too many players");
 		}
-		for (Player item : players) {
+		for (IPlayer item : players) {
 			if (item.getName() == newPlayer.getName())
 				isExists = true;
 			break;
@@ -34,14 +35,14 @@ public class Game implements IGameNetwork {
 		{
 			if (players.size() == 0)
 			{
-				newPlayer.setColor(Player.Color.NOIR);
+				newPlayer.setColor(PlayerImpl.Color.NOIR);
 			}
 			else
 			{
-				if (players.get(0).getColor() == Player.Color.NOIR)
-					newPlayer.setColor(Player.Color.BLANC);
+				if (players.get(0).getColor() == PlayerImpl.Color.NOIR)
+					newPlayer.setColor(PlayerImpl.Color.BLANC);
 				else
-					newPlayer.setColor(Player.Color.NOIR);
+					newPlayer.setColor(PlayerImpl.Color.NOIR);
 			}
 			players.add(newPlayer);
 			System.out.println("added : "+newPlayer.getName());

@@ -1,6 +1,6 @@
 package common;
 
-public class Player {
+public class PlayerImpl implements IPlayer{
 	public static enum Color {BLANC, NOIR};
 	
 	private String name;

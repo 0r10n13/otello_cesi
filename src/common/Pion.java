@@ -1,13 +1,13 @@
 package common;
 
 public class Pion {
-	private Player player;
+	private PlayerImpl player;
 
-	public Player getPlayer() {
+	public PlayerImpl getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(Player player) {
+	public void setPlayer(PlayerImpl player) {
 		this.player = player;
 	}
 }

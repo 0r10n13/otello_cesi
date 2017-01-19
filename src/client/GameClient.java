@@ -4,8 +4,8 @@ import java.rmi.Naming;
 import java.util.Scanner;
 
 import server.IGameNetwork;
-
-import common.Player;
+import common.IPlayer;
+import common.PlayerImpl;
 import common.TooManyPlayersException;
 import common.UserExistsException;
 
@@ -13,7 +13,7 @@ public class GameClient {
 
 	private MainCanvas canvas;
 	private Connection connect;
-	private Player player;
+	private IPlayer player;
 
 	public static void main(String[] args) {
 		// affichage de l'interface
@@ -23,7 +23,7 @@ public class GameClient {
 
 	public void InitMain() {
 
-		setUrl("rmi://10.176.128.139/Othello");
+		setUrl("rmi://10.176.128.143/Othello");
 		SetPlayerName("toto");
 
 	}
@@ -35,7 +35,7 @@ public class GameClient {
 
 	public void SetPlayerName(String name) {
 
-		Player newPlayer = new Player();
+		IPlayer newPlayer = new PlayerImpl();
 		newPlayer.setName(name);
 
 		try {
