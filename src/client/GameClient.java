@@ -1,6 +1,8 @@
 package client;
 
 import java.rmi.Naming;
+import java.rmi.Remote;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
 import server.IGameNetwork;
@@ -13,7 +15,7 @@ public class GameClient {
 
 	private MainCanvas canvas;
 	private Connection connect;
-	private IPlayer player;
+	private PlayerImpl player;
 
 	public static void main(String[] args) {
 		// affichage de l'interface
@@ -35,11 +37,12 @@ public class GameClient {
 
 	public void SetPlayerName(String name) {
 
-		IPlayer newPlayer = new PlayerImpl();
-		newPlayer.setName(name);
+		player = new PlayerImpl();
+		player.setName(name);
 
 		try {
-			player = connect.getStub().addPlayer(newPlayer);
+			IPlayer stubPlayer =  (IPlayer) UnicastRemoteObject.exportObject(player, 0);
+			connect.getStub().addPlayer(stubPlayer);
 
 			System.out.println("adding player OK");
 

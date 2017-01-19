@@ -17,41 +17,30 @@ import common.UserExistsException;
 public class Game implements IGameNetwork {
 	List<IPlayer> players = new ArrayList<IPlayer>();
 	Pion board[][] = new Pion[8][8];
+
 	@Override
-	public IPlayer addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
-		// TODO Auto-generated method stub
-		boolean isExists = false;
-		if (players.size() > 2)
-		{
+	public void addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
+		if (players.size() == 2) {
 			throw new TooManyPlayersException("Too many players");
 		}
+
 		for (IPlayer item : players) {
-			if (item.getName() == newPlayer.getName())
-				isExists = true;
-			break;
-		}
-		
-		if (!isExists)
-		{
-			if (players.size() == 0)
-			{
-				newPlayer.setColor(PlayerImpl.Color.NOIR);
+			if (item.getName() == newPlayer.getName()) {
+				throw new UserExistsException("Username already exists");
 			}
+		}
+
+		if (players.size() == 0) {
+			newPlayer.setColor(PlayerImpl.Color.NOIR);
+		} else {
+			if (players.get(0).getColor() == PlayerImpl.Color.NOIR)
+				newPlayer.setColor(PlayerImpl.Color.BLANC);
 			else
-			{
-				if (players.get(0).getColor() == PlayerImpl.Color.NOIR)
-					newPlayer.setColor(PlayerImpl.Color.BLANC);
-				else
-					newPlayer.setColor(PlayerImpl.Color.NOIR);
-			}
-			players.add(newPlayer);
-			System.out.println("added : "+newPlayer.getName());
-			return newPlayer;
+				newPlayer.setColor(PlayerImpl.Color.NOIR);
 		}
-		else
-		{
-			throw new UserExistsException("Username already exists");
-		}
+		players.add(newPlayer);
+		System.out.println("added : " + newPlayer.getName());
+		// return newPlayer;
 	}
 
 	@Override
@@ -60,13 +49,11 @@ public class Game implements IGameNetwork {
 		return null;
 		// TEST DE QUENTIN
 	}
-	
-	public static void main(String[] args)
-	{
-		try
-		{
+
+	public static void main(String[] args) {
+		try {
 			Game obj = new Game();
-			Remote stub =  UnicastRemoteObject.exportObject(obj, 0);
+			Remote stub = UnicastRemoteObject.exportObject(obj, 0);
 			// Bind the remote object's stub in the registry
 			Registry registry = LocateRegistry.getRegistry();
 			registry.rebind("Othello", stub);
