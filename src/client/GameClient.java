@@ -24,7 +24,7 @@ public class GameClient {
 	}
 
 	public void InitMain() {
-
+//TEST INTERFACAGE
 		setUrl("rmi://10.176.128.143/Othello");
 		SetPlayerName("toto");
 
