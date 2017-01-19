@@ -35,7 +35,7 @@ public class Game implements IGameNetwork {
 			}
 		}
 
-		// si premier joueur inscrit => couleur noire attribuée
+		// si premier joueur inscrit => couleur noire attribuï¿½e
 		if (players.size() == 0) {
 			newPlayer.setColor(CouleurPion.NOIR);
 		} else {
@@ -48,9 +48,17 @@ public class Game implements IGameNetwork {
 		// ajout du joueur
 		players.add(newPlayer);
 		System.out.println("added : " + newPlayer.getName());
-
+		if (players.size() == 2)
+		{
+			startGame();
+		}
 	}
 
+	public void startGame()
+	{
+		board.InitStartBoard(players);
+	}
+	
 	@Override
 	public CouleurPion[][] getBoardState() throws RemoteException {
 
