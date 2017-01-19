@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.CouleurPion;
 import common.IPlayer;
 import common.Pion;
 import common.PlayerImpl;
@@ -31,12 +32,12 @@ public class Game implements IGameNetwork {
 		}
 
 		if (players.size() == 0) {
-			newPlayer.setColor(PlayerImpl.Color.NOIR);
+			newPlayer.setColor(CouleurPion.NOIR);
 		} else {
-			if (players.get(0).getColor() == PlayerImpl.Color.NOIR)
-				newPlayer.setColor(PlayerImpl.Color.BLANC);
+			if (players.get(0).getColor() == CouleurPion.NOIR)
+				newPlayer.setColor(CouleurPion.BLANC);
 			else
-				newPlayer.setColor(PlayerImpl.Color.NOIR);
+				newPlayer.setColor(CouleurPion.NOIR);
 		}
 		players.add(newPlayer);
 		System.out.println("added : " + newPlayer.getName());
