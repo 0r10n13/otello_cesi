@@ -21,27 +21,33 @@ public class Game implements IGameNetwork {
 
 	@Override
 	public void addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
+
+		// controle du nombre de joueurs
 		if (players.size() == 2) {
 			throw new TooManyPlayersException("Too many players");
 		}
 
+		// pour chaque joueur, controle du nom
 		for (IPlayer item : players) {
-			if (item.getName() == newPlayer.getName()) {
+			if (item.getName().equals(newPlayer.getName())) {
 				throw new UserExistsException("Username already exists");
 			}
 		}
 
+		// si premier joueur inscrit => couleur noire attribuée
 		if (players.size() == 0) {
 			newPlayer.setColor(CouleurPion.NOIR);
 		} else {
-			if (players.get(0).getColor() == CouleurPion.NOIR)
+			if (players.get(0).getColor() == CouleurPion.NOIR) {
 				newPlayer.setColor(CouleurPion.BLANC);
-			else
+			} else
 				newPlayer.setColor(CouleurPion.NOIR);
 		}
+
+		// ajout du joueur
 		players.add(newPlayer);
 		System.out.println("added : " + newPlayer.getName());
-		// return newPlayer;
+
 	}
 
 	@Override
