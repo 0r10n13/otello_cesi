@@ -36,44 +36,18 @@ import javax.swing.JScrollPane;
 public class Connexionpage extends JFrame {
 
 	private JPanel contentPane;
-	private JList JLDispo;
 	private JTextField textField;
-
-	private UserService2 userService;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			UserService2 usrSrv=new UserService2();
-	
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						Connexionpage frame = new Connexionpage(usrSrv);
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Create the frame.
 	 * @param userService 
 	 */
-	public Connexionpage(UserService2 userService_p) {
-		userService=userService_p;
+	public Connexionpage() {
+		//userService=userService_p;
 		addWindowListener(new WindowAdapter() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			@Override
 			public void windowOpened(WindowEvent e) {
-				refresh();
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,19 +78,10 @@ public class Connexionpage extends JFrame {
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		JButton btnAjouter = new JButton("Ajouter");
+		JButton btnAjouter = new JButton("Connecter");
 		btnAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nouveau=getTextField().getText();
-				if (!nouveau.isEmpty()) {
-					try {
-						userService.addUser(nouveau);
-						((DefaultListModel)getJLDispo().getModel()).addElement(nouveau);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-						JOptionPane.showMessageDialog(Connexionpage.this, "Impossible d'insérer en base");
-					}
-				}
 			}
 		});
 		GridBagConstraints gbc_btnAjouter = new GridBagConstraints();
@@ -135,65 +100,10 @@ public class Connexionpage extends JFrame {
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 5;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
-		
-
-		JButton btnValider = new JButton("Exporter");
-		btnValider.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser jf=new JFileChooser();
-				FileNameExtensionFilter ff=new FileNameExtensionFilter("Fichier texte", "txt");
-				jf.setFileFilter(ff);
-				if (jf.showSaveDialog(Connexionpage.this)==JFileChooser.APPROVE_OPTION) {
-					try {
-						saveUsers(jf.getSelectedFile());
-					} catch (IOException e1) {
-						JOptionPane.showMessageDialog(Connexionpage.this, "Erreur à l'écriture");
-					}
-				}
-			}
-		});
-	}
-
 	
-
-	protected void saveUsers(File selectedFile) throws IOException {
-		
-		String path=selectedFile.getAbsolutePath();
-		if (!path.toLowerCase().endsWith(".txt")) {
-			path=path+".txt";
-		}
-		PrintWriter pw=new PrintWriter(new FileWriter(path));
-
-		pw.println("Utilisateurs disponibles");
-		for (int i = 0; i < getJLDispo().getModel().getSize(); i++) {
-			pw.println(getJLDispo().getModel().getElementAt(i));
-		}
-		pw.println();
-		
-		pw.close();
-		
-		JOptionPane.showMessageDialog(Connexionpage.this, "Fichier écrit");
-
 	}
 
-	protected JList getJLDispo() {
-		return JLDispo;
-	}
-	
 	public JTextField getTextField() {
 		return textField;
-	}
-
-	private void refresh() {
-		try {
-			((DefaultListModel)getJLDispo().getModel()).removeAllElements();
-			List dispo=userService.getUserDisponibles();
-			for (Object o : dispo) {
-				((DefaultListModel)getJLDispo().getModel()).addElement(o);
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-			JOptionPane.showMessageDialog(Connexionpage.this, "Pas de connection BD");
-		}
 	}
 }

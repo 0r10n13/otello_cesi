@@ -46,5 +46,5 @@ public class MainCanvas extends JFrame {
 //		for (int i=0; i<getWidth()/2; i+=10) {
 //			g.drawOval(i,  i, getWidth()-i , getHeight()-i);
 //		}
-	} // ajout Q
+//	} // ajout Q
 }
