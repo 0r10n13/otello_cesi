@@ -81,10 +81,6 @@ public class NamePage extends JFrame{
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gameClient.SetPlayerName(textField2.getText());
-				JClientFrame canvas=new JClientFrame();
-				canvas.setServer(gameClient.getServer());
-				canvas.setVisible(true);
-				NamePage.this.dispose();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

@@ -19,6 +19,7 @@ import common.UserExistsException;
 public class Game implements IGameNetwork {
 	List<IPlayer> players = new ArrayList<IPlayer>();
 	Board board = new Board();
+	boolean over;
 
 	@Override
 	public void addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
@@ -56,7 +57,26 @@ public class Game implements IGameNetwork {
 
 	public void startGame()
 	{
+		over = false;
 		board.InitStartBoard(players);
+	}
+	
+	public boolean isGameOver()
+	{
+		return false;
+	}
+	
+	public void endTurn()
+	{
+		for (IPlayer item : players)
+		{
+			try {
+				item.changeTurn();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override

@@ -2,22 +2,26 @@ package client;
 
 import java.rmi.Naming;
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
 import server.IGameNetwork;
+import common.IObservable;
+import common.IObservator;
 import common.IPlayer;
 import common.PlayerImpl;
 import common.TooManyPlayersException;
 import common.UserExistsException;
 
-public class GameClient {
+public class GameClient implements IObservator{
 
 
 	private Connection connect;
 	private PlayerImpl player;
 	private Connexionpage connectFrame;
 	private NamePage nameFrame;
+	private JClientFrame gamePage;
 
 	public static void main(String[] args) {
 
@@ -44,6 +48,14 @@ public class GameClient {
 		nameFrame.setVisible(true);
 		nameFrame.setGameClient(this);
 	}
+	
+	public void displayGame()
+	{
+		nameFrame.dispose();
+		gamePage = new JClientFrame();
+		gamePage.setServer(this.getServer());
+		gamePage.setVisible(true);
+	}
 
 	public void setUrl(String url) {
 		connect = new Connection();
@@ -64,7 +76,7 @@ public class GameClient {
 		try {
 			IPlayer stubPlayer =  (IPlayer) UnicastRemoteObject.exportObject(player, 0);
 			connect.getStub().addPlayer(stubPlayer);
-
+			player.addObserver(this);
 			System.out.println("adding player OK");
 
 		} catch (TooManyPlayersException e) {
@@ -78,5 +90,19 @@ public class GameClient {
 
 	public IGameNetwork getServer() {
 		return connect.getStub();
+	}
+
+	@Override
+	public void observableChanged(IObservable object) {
+		if (object.getClass() == IPlayer.class)
+		{
+			try {
+				gamePage.Toggle(player.hasTurn());
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	}
 }
