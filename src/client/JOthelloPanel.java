@@ -17,12 +17,16 @@ import javax.swing.JPanel;
 
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Circle;
+import server.IGameNetwork;
 
 @SuppressWarnings("serial")
 public class JOthelloPanel extends JPanel{
 
-	int NBCOLONNE=10;
-	int NBLIGNE=10;
+	private IGameNetwork server;
+
+	public void setServer(IGameNetwork server) {
+		this.server = server;
+	}
 	public JOthelloPanel() {
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -83,17 +87,17 @@ public class JOthelloPanel extends JPanel{
 			for (int x= 0; x < 8 ; x++) {
 				for (int y = 0; y < 8; y++) {
 					System.out.printf("In for paintComponent");
-					//TokenColor color = server.getColorAt(x, y);
-					//if (color != null) {
+					String[][] color = server.getBoardState();
+					if (color != null) {
 						Rectangle r = getCellCoords(x, y);
 						//Car
 						//Color c=color == TokenColor.WHITE ? Color.white : Color.BLACK;
 						Color c = Color.GRAY;
 						g.setColor(c);
 						((Graphics2D)g).setPaint(c);
-						//((Graphics2D)g).fill(new Ellipse2D.Float(r.x, r.y, r.width, r.width));
+						((Graphics2D)g).fill(new Ellipse2D.Float(r.x, r.y, r.width, r.height));
 						g.drawRect(r.x, r.y, r.width, r.height);
-					//}
+					}
 				}
 			}
 		} catch (RemoteException e) {
