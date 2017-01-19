@@ -1,10 +1,9 @@
 package common;
 
-public class Player {
-	public static enum Color {BLANC, NOIR};
+public class PlayerImpl implements IPlayer{
 	
 	private String name;
-	private Color color;
+	private CouleurPion color;
 
 	public String getName() {
 		return name;
@@ -14,11 +13,11 @@ public class Player {
 		this.name = name;
 	}
 
-	public Color getColor() {
+	public CouleurPion getColor() {
 		return color;
 	}
 
-	public void setColor(Color color) {
+	public void setColor(CouleurPion color) {
 		this.color = color;
 	}
 }
