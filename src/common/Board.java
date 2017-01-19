@@ -51,4 +51,149 @@ public class Board {
 
 		return result;
 	}
+
+	public boolean IsPositionFree(int x, int y) {
+		if (board[x][y] != null) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean IsPositionAuthorised(int x, int y, CouleurPion couleur) {
+
+		// gauche
+		Pion left = board[x - 1][y];
+		// si pion présent et de couleur différente, on continue
+		if (left != null && left.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x - 1 - i][y].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// gauche/haut
+		Pion leftUp = board[x - 1][y - 1];
+		// si pion présent et de couleur différente, on continue
+		if (leftUp != null && leftUp.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// haut
+		Pion up = board[x][y - 1];
+		// si pion présent et de couleur différente, on continue
+		if (up != null && up.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x][y - 1 - i].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// droite/haut
+		Pion rightUp = board[x + 1][y - 1];
+		// si pion présent et de couleur différente, on continue
+		if (rightUp != null && rightUp.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// droite
+		Pion right = board[x + 1][y];
+		// si pion présent et de couleur différente, on continue
+		if (right != null && right.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x + 1 + i][y].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// droite/bas
+		Pion rightDown = board[x + 1][y + 1];
+		// si pion présent et de couleur différente, on continue
+		if (rightDown != null && rightDown.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// bas
+		Pion down = board[x][y + 1];
+		// si pion présent et de couleur différente, on continue
+		if (down != null && down.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x][y + 1 + i].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// gauche/bas
+		Pion leftDown = board[x - 1][y + 1];
+		// si pion présent et de couleur différente, on continue
+		if (leftDown != null && leftDown.getPlayer().getColor() != couleur) {
+
+			// si après le premier pion, un autre pion de la couleur du joueur
+			// est trouvé, on arrête, on sais que la position est valide
+			for (int i = 0; i < 8; i++) {
+				if (board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
+					return true;
+				}
+			}
+		}
+
+		// si toutes les positions autour sont vides
+		if (left == null && leftUp == null && up == null && rightUp == null && right == null && rightDown == null
+				&& down == null && leftDown == null) {
+			System.out.println("position entourée de vide");
+			return false;
+		}
+
+		// si toutes les positions autour sont de la même couleur que le joueur
+		if (left != null && left.getPlayer().getColor() == couleur
+				&& leftUp != null && leftUp.getPlayer().getColor() == couleur
+				&& up != null && up.getPlayer().getColor() == couleur
+				&& rightUp != null && rightUp.getPlayer().getColor() == couleur
+				&& right != null && right.getPlayer().getColor() == couleur
+				&& rightDown != null && rightDown.getPlayer().getColor() == couleur
+				&& down != null && down.getPlayer().getColor() == couleur
+				&& leftDown != null && leftDown.getPlayer().getColor() == couleur) {
+			System.out.println("position entourée de votre couleur");
+			return false;
+		}
+
+		return true;
+	}
+
 }

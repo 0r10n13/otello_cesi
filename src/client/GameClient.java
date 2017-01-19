@@ -34,6 +34,9 @@ public class GameClient implements IObservator{
 		connectFrame = new Connexionpage(this);
 		connectFrame.setVisible(true);
 		
+//		JClientFrame toto = new JClientFrame();
+//		toto.setVisible(true);
+		
 //TEST INTERFACAGE
 		//setUrl("rmi://10.176.128.139/Othello");
 		//SetPlayerName("toto");

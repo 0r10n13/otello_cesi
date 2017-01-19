@@ -11,8 +11,6 @@ import java.util.List;
 import common.Board;
 import common.CouleurPion;
 import common.IPlayer;
-import common.Pion;
-import common.PlayerImpl;
 import common.TooManyPlayersException;
 import common.UserExistsException;
 
@@ -81,9 +79,23 @@ public class Game implements IGameNetwork {
 	
 	@Override
 	public CouleurPion[][] getBoardState() throws RemoteException {
-
 		return board.GetBoardState();
+	}
 
+	@Override
+	public boolean CheckPosition(int x, int y, CouleurPion couleur) {
+		
+		//check si la case est vide
+		if (!board.IsPositionFree(x, y)){
+			return false;
+		}
+		
+		//check si la position est autorisée
+		if (!board.IsPositionAuthorised(x, y, couleur)){
+			return false;
+		}
+		
+		return true;
 	}
 
 	public static void main(String[] args) {
