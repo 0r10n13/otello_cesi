@@ -40,6 +40,7 @@ public class GameClient {
 		connectFrame.dispose();
 		nameFrame = new NamePage();
 		nameFrame.setVisible(true);
+		nameFrame.setGameClient(this);
 	}
 
 	public void setUrl(String url) {
