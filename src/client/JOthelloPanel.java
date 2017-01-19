@@ -93,15 +93,16 @@ public class JOthelloPanel extends JPanel{
 			for (int x= 0; x < 8 ; x++) {
 				for (int y = 0; y < 8; y++) {
 					System.out.printf("In for paintComponent\n");
-					
+
+					Rectangle r = getCellCoords(x, y);
 					if (color[x][y] != null) {
-						Rectangle r = getCellCoords(x, y);
 						Color c= color[x][y] == CouleurPion.BLANC ? Color.white : Color.BLACK;					
 						g.setColor(c);
 						((Graphics2D)g).setPaint(c);
 						((Graphics2D)g).fill(new Ellipse2D.Float(r.x, r.y, r.width, r.height));
-						g.drawRect(r.x, r.y, r.width, r.height);
 					}
+					g.setColor(Color.BLACK);
+					g.drawRect(r.x, r.y, r.width, r.height);
 				}
 			}
 		} catch (RemoteException e) {
