@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
@@ -12,6 +14,9 @@ import java.rmi.RemoteException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import javafx.scene.control.Tab;
+import javafx.scene.shape.Circle;
 
 @SuppressWarnings("serial")
 public class JOthelloPanel extends JPanel{
@@ -50,8 +55,8 @@ public class JOthelloPanel extends JPanel{
 	 */
 	private Rectangle getCellCoords(int x, int y) throws RemoteException {
 
-		int cellWidth = (int) getWidth() / getWidth();
-		int cellHeight = (int) getHeight() / getHeight();
+		int cellWidth = (int) getWidth() / 8;
+		int cellHeight = (int) getHeight() / 8;
 		return new Rectangle(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
 	}
 
@@ -64,8 +69,8 @@ public class JOthelloPanel extends JPanel{
 	 */
 	private Point getCoordsCell(int x, int y) throws RemoteException {
 
-		int cell_x = (int)(x/(getWidth() / getWidth()));
-		int cell_y = (int)(y/(getHeight() / getHeight()));
+		int cell_x = (int)(x/(getWidth() / 8));
+		int cell_y = (int)(y/(getHeight() / 8));
 		return new Point(cell_x, cell_y);
 	}
 
@@ -74,19 +79,20 @@ public class JOthelloPanel extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		try {
-			for (int x= 0; x < getWidth() ; x++) {
-				for (int y = 0; y < getHeight(); y++) {
+			//Tab test_color = ["WHITE","BLACK"];
+			for (int x= 0; x < 8 ; x++) {
+				for (int y = 0; y < 8; y++) {
 					System.out.printf("In for paintComponent");
 					//TokenColor color = server.getColorAt(x, y);
 					//if (color != null) {
 						Rectangle r = getCellCoords(x, y);
+						//Car
 						//Color c=color == TokenColor.WHITE ? Color.white : Color.BLACK;
-						Color c = Color.RED;
-						g.setColor( Color.RED);
+						Color c = Color.GRAY;
+						g.setColor(c);
 						((Graphics2D)g).setPaint(c);
-						((Graphics2D)g).fill(new Ellipse2D.Float(r.x, r.y, r.width, r.height));
-						g.drawOval(r.x, r.y, r.width, r.height);
-						
+						//((Graphics2D)g).fill(new Ellipse2D.Float(r.x, r.y, r.width, r.width));
+						g.drawRect(r.x, r.y, r.width, r.height);
 					//}
 				}
 			}

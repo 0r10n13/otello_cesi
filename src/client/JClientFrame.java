@@ -20,6 +20,19 @@ public class JClientFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JOthelloPanel panel;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JClientFrame frame = new JClientFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	public JClientFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
