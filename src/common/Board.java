@@ -59,7 +59,7 @@ public class Board {
 		return true;
 	}
 
-	public boolean IsPositionAuthorised(int x, int y, CouleurPion couleur) {
+	public boolean IsPositionAuthorised(int x, int y, CouleurPion couleur) throws RemoteException {
 
 		// gauche
 		Pion left = board[x - 1][y];

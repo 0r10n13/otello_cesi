@@ -83,7 +83,7 @@ public class Game implements IGameNetwork {
 	}
 
 	@Override
-	public boolean CheckPosition(int x, int y, CouleurPion couleur) {
+	public boolean CheckPosition(int x, int y, CouleurPion couleur) throws RemoteException {
 		
 		//check si la case est vide
 		if (!board.IsPositionFree(x, y)){
