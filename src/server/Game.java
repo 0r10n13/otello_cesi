@@ -8,6 +8,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.Board;
 import common.CouleurPion;
 import common.IPlayer;
 import common.Pion;
@@ -17,7 +18,7 @@ import common.UserExistsException;
 
 public class Game implements IGameNetwork {
 	List<IPlayer> players = new ArrayList<IPlayer>();
-	Pion board[][] = new Pion[8][8];
+	Board board = new Board();
 
 	@Override
 	public void addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {
@@ -51,10 +52,10 @@ public class Game implements IGameNetwork {
 	}
 
 	@Override
-	public String[][] getBoardState() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
-		// TEST DE QUENTIN
+	public CouleurPion[][] getBoardState() throws RemoteException {
+
+		return board.GetBoardState();
+
 	}
 
 	public static void main(String[] args) {
