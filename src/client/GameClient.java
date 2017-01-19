@@ -47,7 +47,15 @@ public class GameClient {
 
 	public void setUrl(String url) {
 		connect = new Connection();
-		connect.Connect(url);
+		try {
+			connect.Connect(url);
+			canvas=new JClientFrame();
+			canvas.setServer(connect.getStub());
+			canvas.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void SetPlayerName(String name) {

@@ -1,6 +1,9 @@
 package client;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Scanner;
 
 import server.IGameNetwork;
@@ -13,9 +16,8 @@ public class Connection {
 		return stub;
 	}
 
-	public void Connect(String url) {
+	public void Connect(String url) throws Exception {
 
-		try {
 			url = "rmi://"+url+"/Othello";
 			stub = (IGameNetwork) Naming.lookup(url);
 
@@ -31,11 +33,6 @@ public class Connection {
 			// System.out.println(name + (name != null ? "Ajout�" : "d�j�
 			// pr�sent"));
 			// System.out.println(stub.getPlayers());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("connection FAILED");
-			e.printStackTrace();
-		}
 	}
 
 }

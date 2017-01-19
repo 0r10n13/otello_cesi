@@ -84,16 +84,19 @@ public class JOthelloPanel extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		try {
-			//Tab test_color = ["WHITE","BLACK"];
+			if (server==null)
+			{
+				return;
+			}
+			CouleurPion[][] color = server.getBoardState();
+			color[2][3]=CouleurPion.NOIR;
 			for (int x= 0; x < 8 ; x++) {
 				for (int y = 0; y < 8; y++) {
 					System.out.printf("In for paintComponent");
-					CouleurPion[][] color = server.getBoardState();
-					if (color != null) {
+					
+					if (color[x][y] != null) {
 						Rectangle r = getCellCoords(x, y);
-						//Car
-						//Color c=color == TokenColor.WHITE ? Color.white : Color.BLACK;
-						Color c = Color.GRAY;
+						Color c= color[x][y] == CouleurPion.BLANC ? Color.white : Color.BLACK;					
 						g.setColor(c);
 						((Graphics2D)g).setPaint(c);
 						((Graphics2D)g).fill(new Ellipse2D.Float(r.x, r.y, r.width, r.height));
