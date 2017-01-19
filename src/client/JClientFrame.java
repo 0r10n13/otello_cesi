@@ -16,12 +16,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import server.IGameNetwork;
+
 public class JClientFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JOthelloPanel panel;
 	
-	public static void main(String[] args) {
+	/**public void Init() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -32,7 +34,7 @@ public class JClientFrame extends JFrame {
 				}
 			}
 		});
-	}
+	}*/
 
 	public JClientFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +108,10 @@ public class JClientFrame extends JFrame {
 
 
 	public void refreshBoard() throws RemoteException {
+		internRefreshBoard();
+	}
+
+	private void internRefreshBoard() {
 		getOthelloPanel().invalidate();
 		getOthelloPanel().repaint();
 	}
@@ -132,5 +138,10 @@ public class JClientFrame extends JFrame {
 	public void otherTurn() throws RemoteException {
 		//getOthelloPanel().setEnabled(false);
 		setTitle("Tour de l'autre de jouer");
+	}
+
+	public void setServer(IGameNetwork stub) {
+		panel.setServer(stub);
+		internRefreshBoard();
 	}
 }
