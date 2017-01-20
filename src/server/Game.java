@@ -125,7 +125,15 @@ public class Game implements IGameNetwork {
 		}
 		
 		//check si la position est autoris�e
-		if (!board.IsPositionAuthorised(x, y, couleur)){
+		IPlayer current = null;
+		for (IPlayer iPlayer : players) {
+			if (iPlayer.hasTurn()){
+				current = iPlayer;
+				break;
+			}
+		}
+		
+		if (!board.IsPositionAuthorised(x, y, current)){
 			return false;
 		}
 		
