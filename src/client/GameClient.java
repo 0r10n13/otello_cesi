@@ -81,6 +81,7 @@ public class GameClient implements IObservator{
 			connect.getStub().addPlayer(stubPlayer);
 			player.addObserver(this);
 			System.out.println("adding player OK");
+			displayGame();
 
 		} catch (TooManyPlayersException e) {
 			System.out.println(e);

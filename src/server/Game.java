@@ -59,10 +59,35 @@ public class Game implements IGameNetwork {
 		board.InitStartBoard(players);
 	}
 	
-	public boolean isGameOver()
+	public boolean isGameOver() throws RemoteException
 	{
-		return false;
+		for (int x = 0; x < 8; x++)
+		{
+			for (int y = 0; y < 8; y++)
+			{
+				if (CheckPosition(x, y, CouleurPion.NOIR) || CheckPosition(x, y, CouleurPion.BLANC))
+					return false;
+			}
+		}
+		return true;
 	}
+	
+//	public IPlayer checkWinner()
+//	{
+//		int black, white = 0;
+//		IPlayer winner = null;
+//		try {
+//			black = board.getNumberPion(CouleurPion.NOIR);
+//			white = board.getNumberPion(CouleurPion.BLANC);
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		if (black > white)
+//		{
+//			
+//		}
+//	}
 	
 	public void endTurn()
 	{
@@ -90,7 +115,7 @@ public class Game implements IGameNetwork {
 			return false;
 		}
 		
-		//check si la position est autorisée
+		//check si la position est autorisï¿½e
 		if (!board.IsPositionAuthorised(x, y, couleur)){
 			return false;
 		}
