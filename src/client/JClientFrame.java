@@ -28,6 +28,7 @@ public class JClientFrame extends JFrame {
 	private JPanel contentPane;
 	private JOthelloPanel panel;
 	private PlayerImpl player;
+	private JLabel label_score;
 
 	/**
 	 * public void Init() { EventQueue.invokeLater(new Runnable() { public void
@@ -57,6 +58,14 @@ public class JClientFrame extends JFrame {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
 		contentPane.add(panel, gbc_panel);
+
+		label_score = new JLabel("Score blanc :" + "0" + ", score noir :" + "0");
+		GridBagConstraints gbc_label_turn = new GridBagConstraints();
+		gbc_label_turn.insets = new Insets(0, 0, 5, 0);
+		gbc_label_turn.gridx = 0;
+		gbc_label_turn.gridy = 0;
+		contentPane.add(label_score, gbc_label_turn);
+		setContentPane(contentPane);
 	}
 
 	public JOthelloPanel getOthelloPanel() {
@@ -75,12 +84,15 @@ public class JClientFrame extends JFrame {
 		gbc_label_turn.gridx = 0;
 		gbc_label_turn.gridy = 0;
 		contentPane.add(label_color, gbc_label_turn);
-		System.out.println("test");
 		setContentPane(contentPane);
 	}
-	
-	public void displayGameOver(IPlayer winner) throws RemoteException
-	{
+
+	public void setCounter(int blanc, int noir) {
+
+		label_score.setText("Score blanc :" + blanc + ", score noir :" + noir);
+	}
+
+	public void displayGameOver(IPlayer winner) throws RemoteException {
 		String message = "";
 		if (winner == null)
 			message = "Match nul !";
@@ -88,7 +100,7 @@ public class JClientFrame extends JFrame {
 			message = "Vous avez gagné !";
 		else
 			message = "Vous avez perdu !";
-		javax.swing.JOptionPane.showMessageDialog(null,message); 
+		javax.swing.JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void refreshBoard() throws RemoteException {

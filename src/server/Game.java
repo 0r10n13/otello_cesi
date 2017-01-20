@@ -18,6 +18,11 @@ public class Game implements IGameNetwork {
 	List<IPlayer> players = new ArrayList<IPlayer>();
 	Board board = new Board();
 	boolean over;
+	
+	@Override
+	public int GetScoreByColor(CouleurPion couleur) throws RemoteException{
+		return board.getNumberPion(couleur);
+	}
 
 	@Override
 	public void addPlayer(IPlayer newPlayer) throws RemoteException, UserExistsException, TooManyPlayersException {

@@ -118,6 +118,7 @@ public class GameClient implements IObservator{
 			try {
 				System.out.println("turn changed");
 				gamePage.Toggle(player.hasTurn());
+				RefreshScore();
 				gamePage.refreshBoard();
 				if (connect.getStub().isGameOver())
 				{
@@ -127,6 +128,19 @@ public class GameClient implements IObservator{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+	}
+	
+	public void RefreshScore(){
+		try {
+			int noir = connect.getStub().GetScoreByColor(CouleurPion.NOIR);
+			int blanc = connect.getStub().GetScoreByColor(CouleurPion.BLANC);
+			
+			gamePage.setCounter(blanc, noir);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}
