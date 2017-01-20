@@ -38,6 +38,7 @@ public class JOthelloPanel extends JPanel{
 	}
 
 	public JOthelloPanel() {
+		//jclientframe.setName(player.getName());
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -62,7 +63,6 @@ public class JOthelloPanel extends JPanel{
 			{
 				//System.out.printf("Impossible de poser le pion");
 				javax.swing.JOptionPane.showMessageDialog(null,"Impossible de poser le pion"); 
-
 			}
 			invalidate();
 			repaint();
@@ -107,6 +107,7 @@ public class JOthelloPanel extends JPanel{
 			{
 				return;
 			}
+			
 			CouleurPion[][] color = server.getBoardState();
 			//color[2][3]=CouleurPion.NOIR;
 			for (int x= 0; x < 8 ; x++) {
