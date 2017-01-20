@@ -52,11 +52,11 @@ public class GameClient implements IObservator{
 		nameFrame.setGameClient(this);
 		gamePage = new JClientFrame();
 		gamePage.setServer(this.getServer());
-		gamePage.SetPlayer(this.player);
 	}
 	
 	public void displayGame()
 	{
+		gamePage.SetPlayer(this.player);
 		nameFrame.dispose();
 		gamePage.setVisible(true);
 	}
