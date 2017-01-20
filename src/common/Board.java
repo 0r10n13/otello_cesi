@@ -76,6 +76,8 @@ public class Board {
 		return true;
 	}
 
+	// retourne false si le placement demand� n'est pas possible et modifie la
+	// couleur des pions dans le cas contraire
 	public boolean IsPositionAuthorised(int x, int y, CouleurPion couleur) throws RemoteException {
 
 		// gauche
@@ -87,7 +89,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x - 1 - i][y].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x - 1 - j][y].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -101,7 +106,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x - 1 - j][y -1 - j].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -115,7 +123,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x][y - 1 - i].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x][y - 1 - j].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -129,7 +140,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x + 1 + j][y - 1 - j].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -143,7 +157,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x + 1 + i][y].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x + 1 + j][y].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -157,7 +174,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x + 1 + j][y + 1 + j].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -171,7 +191,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x][y + 1 + i].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x][y + 1 + j].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -185,7 +208,10 @@ public class Board {
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
 				if (board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
-					return true;
+					for (int j = 0; j < i; j++) {
+						board[x - 1 - j][y + 1 + j].getPlayer().setColor(couleur);
+					}
+					continue;
 				}
 			}
 		}
@@ -198,13 +224,11 @@ public class Board {
 		}
 
 		// si toutes les positions autour sont de la m�me couleur que le joueur
-		if (left != null && left.getPlayer().getColor() == couleur
-				&& leftUp != null && leftUp.getPlayer().getColor() == couleur
-				&& up != null && up.getPlayer().getColor() == couleur
-				&& rightUp != null && rightUp.getPlayer().getColor() == couleur
-				&& right != null && right.getPlayer().getColor() == couleur
-				&& rightDown != null && rightDown.getPlayer().getColor() == couleur
-				&& down != null && down.getPlayer().getColor() == couleur
+		if (left != null && left.getPlayer().getColor() == couleur && leftUp != null
+				&& leftUp.getPlayer().getColor() == couleur && up != null && up.getPlayer().getColor() == couleur
+				&& rightUp != null && rightUp.getPlayer().getColor() == couleur && right != null
+				&& right.getPlayer().getColor() == couleur && rightDown != null
+				&& rightDown.getPlayer().getColor() == couleur && down != null && down.getPlayer().getColor() == couleur
 				&& leftDown != null && leftDown.getPlayer().getColor() == couleur) {
 			System.out.println("position entour�e de votre couleur");
 			return false;
