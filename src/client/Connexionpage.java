@@ -24,6 +24,7 @@ public class Connexionpage extends JFrame {
 	 * Create the frame.
 	 * @param userService 
 	 */
+	
 	public Connexionpage(GameClient gameClient) {
 		this.gameClient = gameClient;
 		addWindowListener(new WindowAdapter() {
@@ -95,5 +96,9 @@ public class Connexionpage extends JFrame {
 
 	public JTextField getTextField() {
 		return textField;
+	}
+	
+	public void ErrorConnexion (){
+		javax.swing.JOptionPane.showMessageDialog(null,"Erreur de connexion"); 
 	}
 }
