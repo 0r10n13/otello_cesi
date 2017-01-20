@@ -12,6 +12,6 @@ public interface IGameNetwork extends Remote {
 	public void addPlayer(IPlayer player) throws RemoteException, UserExistsException, TooManyPlayersException;
 
 	public CouleurPion[][] getBoardState() throws RemoteException;
-	
+
 	public boolean CheckPosition(int x, int y, CouleurPion couleur) throws RemoteException;
 }

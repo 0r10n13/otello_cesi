@@ -14,4 +14,6 @@ public interface IPlayer extends Remote, IObservable {
 	public void changeTurn() throws RemoteException;
 	
 	public void setTurn(boolean hasturn) throws RemoteException;
+	
+	public boolean hasTurn() throws RemoteException;
 }

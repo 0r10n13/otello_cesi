@@ -74,8 +74,9 @@ public class Board {
 
 	// retourne false si le placement demandï¿½ n'est pas possible et modifie la
 	// couleur des pions dans le cas contraire
-	public boolean IsPositionAuthorised(int x, int y, CouleurPion couleur) throws RemoteException {
+	public boolean IsPositionAuthorised(int x, int y, IPlayer current) throws RemoteException {
 
+		CouleurPion couleur = current.getColor();
 		IPlayer player = null;
 
 		// gauche
@@ -89,7 +90,9 @@ public class Board {
 						&& board[x - 1 - i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x - 1 - j][y].getPlayer();
-						board[x - 1 - j][y].getPlayer().setColor(couleur);
+
+						board[x - 1 - j][y] = new Pion();
+						board[x - 1 - j][y].setPlayer(current);
 					}
 					break;
 				}
@@ -108,7 +111,9 @@ public class Board {
 						&& board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x - 1 - j][y - 1 - j].getPlayer();
-						board[x - 1 - j][y - 1 - j].getPlayer().setColor(couleur);
+
+						board[x - 1 - j][y - 1 - j] = new Pion();
+						board[x - 1 - j][y - 1 - j].setPlayer(current);
 					}
 					break;
 				}
@@ -127,7 +132,9 @@ public class Board {
 						&& board[x][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x][y - 1 - j].getPlayer();
-						board[x][y - 1 - j].getPlayer().setColor(couleur);
+
+						board[x][y - 1 - j] = new Pion();
+						board[x][y - 1 - j].setPlayer(current);
 					}
 					break;
 				}
@@ -146,7 +153,9 @@ public class Board {
 						&& board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x + 1 + j][y - 1 - j].getPlayer();
-						board[x + 1 + j][y - 1 - j].getPlayer().setColor(couleur);
+
+						board[x + 1 + j][y - 1 - j] = new Pion();
+						board[x + 1 + j][y - 1 - j].setPlayer(current);
 					}
 					break;
 				}
@@ -165,7 +174,9 @@ public class Board {
 						&& board[x + 1 + i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x + 1 + j][y].getPlayer();
-						board[x + 1 + j][y].getPlayer().setColor(couleur);
+
+						board[x + 1 + j][y] = new Pion();
+						board[x + 1 + j][y].setPlayer(current);
 					}
 					break;
 				}
@@ -184,7 +195,9 @@ public class Board {
 						&& board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x + 1 + j][y + 1 + j].getPlayer();
-						board[x + 1 + j][y + 1 + j].getPlayer().setColor(couleur);
+
+						board[x + 1 + j][y + 1 + j] = new Pion();
+						board[x + 1 + j][y + 1 + j].setPlayer(current);
 					}
 					break;
 				}
@@ -203,7 +216,9 @@ public class Board {
 						&& board[x][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x][y + 1 + j].getPlayer();
-						board[x][y + 1 + j].getPlayer().setColor(couleur);
+
+						board[x][y + 1 + j] = new Pion();
+						board[x][y + 1 + j].setPlayer(current);
 					}
 					break;
 				}
@@ -222,7 +237,9 @@ public class Board {
 						&& board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x - 1 - j][y + 1 + j].getPlayer();
-						board[x - 1 - j][y + 1 + j].getPlayer().setColor(couleur);
+
+						board[x - 1 - j][y + 1 + j] = new Pion();
+						board[x - 1 - j][y + 1 + j].setPlayer(current);
 					}
 					break;
 				}
@@ -257,7 +274,7 @@ public class Board {
 		// si aucune erreur de levé, on peux ajouter un pion à l'endroit cliqué
 		if (player != null) {
 			board[x][y] = new Pion();
-			board[x][y].setPlayer(player);
+			board[x][y].setPlayer(current);
 		}
 
 		return true;
