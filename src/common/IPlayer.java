@@ -12,4 +12,6 @@ public interface IPlayer extends Remote, IObservable {
 	public void setColor(CouleurPion color) throws RemoteException;
 	
 	public void changeTurn() throws RemoteException;
+	
+	public void setTurn(boolean hasturn) throws RemoteException;
 }
