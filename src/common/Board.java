@@ -33,21 +33,17 @@ public class Board {
 			}
 		}
 	}
-	
-	public int getNumberPion(CouleurPion color) throws RemoteException
-	{
+
+	public int getNumberPion(CouleurPion color) throws RemoteException {
 		int count = 0;
-		for (int x = 0; x < 8; x++)
-		{
-			for (int y = 0; y < 8; y++)
-			{
-				if (board[x][y].getPlayer().getColor() == color)
-				{
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 8; y++) {
+				if (board[x][y].getPlayer().getColor() == color) {
 					count++;
 				}
 			}
 		}
-		
+
 		return count;
 	}
 
@@ -88,11 +84,11 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x - 1 - i][y].getPlayer().getColor() == couleur) {
+				if (board[x - 1 - i][y] != null && board[x - 1 - i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x - 1 - j][y].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -105,11 +101,12 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
+				if (board[x - 1 - i][y - 1 - i] != null
+						&& board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
-						board[x - 1 - j][y -1 - j].getPlayer().setColor(couleur);
+						board[x - 1 - j][y - 1 - j].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -122,11 +119,11 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x][y - 1 - i].getPlayer().getColor() == couleur) {
+				if (board[x][y - 1 - i] != null && board[x][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x][y - 1 - j].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -139,11 +136,12 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
+				if (board[x + 1 + i][y - 1 - i] != null
+						&& board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x + 1 + j][y - 1 - j].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -156,11 +154,11 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x + 1 + i][y].getPlayer().getColor() == couleur) {
+				if (board[x + 1 + i][y] != null && board[x + 1 + i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x + 1 + j][y].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -173,11 +171,12 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
+				if (board[x + 1 + i][y + 1 + i] != null
+						&& board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x + 1 + j][y + 1 + j].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -190,11 +189,11 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x][y + 1 + i].getPlayer().getColor() == couleur) {
+				if (board[x][y + 1 + i] != null && board[x][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x][y + 1 + j].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -207,11 +206,12 @@ public class Board {
 			// si apr�s le premier pion, un autre pion de la couleur du joueur
 			// est trouv�, on arr�te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
+				if (board[x - 1 - i][y + 1 + i] != null
+						&& board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						board[x - 1 - j][y + 1 + j].getPlayer().setColor(couleur);
 					}
-					continue;
+					break;
 				}
 			}
 		}
@@ -223,7 +223,8 @@ public class Board {
 			return false;
 		}
 
-		// si toutes les positions autour sont de la m�me couleur que le joueur
+		// si toutes les positions autour sont de la m�me couleur que le
+		// joueur
 		if (left != null && left.getPlayer().getColor() == couleur && leftUp != null
 				&& leftUp.getPlayer().getColor() == couleur && up != null && up.getPlayer().getColor() == couleur
 				&& rightUp != null && rightUp.getPlayer().getColor() == couleur && right != null
