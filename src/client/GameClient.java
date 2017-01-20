@@ -50,14 +50,14 @@ public class GameClient implements IObservator{
 		nameFrame = new NamePage();
 		nameFrame.setVisible(true);
 		nameFrame.setGameClient(this);
+		gamePage = new JClientFrame();
+		gamePage.setServer(this.getServer());
+		gamePage.SetPlayer(this.player);
 	}
 	
 	public void displayGame()
 	{
 		nameFrame.dispose();
-		gamePage = new JClientFrame();
-		gamePage.setServer(this.getServer());
-		gamePage.SetPlayer(this.player);
 		gamePage.setVisible(true);
 	}
 
@@ -78,9 +78,9 @@ public class GameClient implements IObservator{
 		player.setName(name);
 
 		try {
+			player.addObserver(this);
 			IPlayer stubPlayer =  (IPlayer) UnicastRemoteObject.exportObject(player, 0);
 			connect.getStub().addPlayer(stubPlayer);
-			player.addObserver(this);
 			System.out.println("adding player OK");
 			displayGame();
 
@@ -90,6 +90,7 @@ public class GameClient implements IObservator{
 			System.out.println(e);
 		} catch (Exception e) {
 			System.out.println(e);
+			System.out.println(e.getStackTrace());
 		}
 	}
 
@@ -99,7 +100,7 @@ public class GameClient implements IObservator{
 
 	@Override
 	public void observableChanged(IObservable object) {
-		if (object.getClass() == IPlayer.class)
+		if (object.getClass() == PlayerImpl.class)
 		{
 			try {
 				System.out.println("turn changed");
