@@ -58,6 +58,7 @@ public class Game implements IGameNetwork {
 		over = false;
 		players.get(0).setTurn(true);
 		players.get(1).setTurn(false);
+		endTurn();
 		board.InitStartBoard(players);
 	}
 	
