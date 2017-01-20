@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import common.Board;
 import common.CouleurPion;
 import common.PlayerImpl;
 import server.IGameNetwork;
@@ -26,19 +27,13 @@ public class JClientFrame extends JFrame {
 	private JPanel contentPane;
 	private JOthelloPanel panel;
 	private PlayerImpl player;
-	
-	/**public void Init() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JClientFrame frame = new JClientFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
+	/**
+	 * public void Init() { EventQueue.invokeLater(new Runnable() { public void
+	 * run() { try { JClientFrame frame = new JClientFrame();
+	 * frame.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 * }); }
+	 */
 
 	public JClientFrame() {
 		setTitle("Othello");
@@ -48,12 +43,12 @@ public class JClientFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
+
 		panel = new JOthelloPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 2;
@@ -68,18 +63,18 @@ public class JClientFrame extends JFrame {
 	}
 
 	public JTextField getJtfUserName() {
-		//return jtfUserName;
+		// return jtfUserName;
 		return null;
 	}
-	
-	public void setColorName(String color)
-	{
-		JLabel label_color = new JLabel("Vous êtes "+color);
+
+	public void setColorName(String color) {
+		JLabel label_color = new JLabel("Vous êtes " + color);
 		GridBagConstraints gbc_label_turn = new GridBagConstraints();
 		gbc_label_turn.insets = new Insets(0, 0, 5, 5);
 		gbc_label_turn.gridx = 0;
 		gbc_label_turn.gridy = 0;
-		contentPane.add(label_color, gbc_label_turn);System.out.println("test");
+		contentPane.add(label_color, gbc_label_turn);
+		System.out.println("test");
 		setContentPane(contentPane);
 	}
 
@@ -92,27 +87,26 @@ public class JClientFrame extends JFrame {
 		getOthelloPanel().repaint();
 	}
 
-	
 	public String getPlayerName() throws RemoteException {
 		return panel.getName();
 	}
-	
+
 	public void Toggle(boolean etat) throws RemoteException {
-		if (etat==true){
+		if (etat == true) {
 			getOthelloPanel().setEnabled(true);
 			setTitle("A votre tour de jouer");
-		}
-		else{
+		} else {
 			getOthelloPanel().setEnabled(false);
 			setTitle("Au tour de l'adversaire de jouer");
 		}
 	}
+
 	public void setServer(IGameNetwork stub) {
 		panel.setServer(stub);
 		internRefreshBoard();
 	}
-	public void SetPlayer(PlayerImpl player)
-	{
+
+	public void SetPlayer(PlayerImpl player) {
 		this.player = player;
 		panel.SetPlayer(player);
 	}
