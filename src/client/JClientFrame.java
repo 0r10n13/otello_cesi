@@ -24,6 +24,7 @@ public class JClientFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JOthelloPanel panel;
+	private PlayerImpl player;
 	
 	/**public void Init() {
 		EventQueue.invokeLater(new Runnable() {
@@ -117,11 +118,12 @@ public class JClientFrame extends JFrame {
 	public void Toggle(boolean etat) throws RemoteException {
 		if (etat==true){
 			getOthelloPanel().setEnabled(true);
+			setTitle("A votre tour de jouer");
 		}
 		else{
 			getOthelloPanel().setEnabled(false);
+			setTitle("Au tour de l'adversaire de jouer");
 		}
-		setTitle("Au tour de " + getPlayerName() + " de jouer");
 	}
 	public void setServer(IGameNetwork stub) {
 		panel.setServer(stub);
@@ -129,6 +131,7 @@ public class JClientFrame extends JFrame {
 	}
 	public void SetPlayer(PlayerImpl player)
 	{
+		this.player = player;
 		panel.SetPlayer(player);
 	}
 }
