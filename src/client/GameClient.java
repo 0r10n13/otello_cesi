@@ -69,12 +69,8 @@ public class GameClient implements IObservator{
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-<<<<<<< HEAD
 			System.out.println("connexion impossible");
 			connectFrame.ErrorConnexion();
-=======
-			e.printStackTrace();
->>>>>>> eceb3caeb4432f248dd337686bd0da1c36ad80f9
 		}
 	}
 
