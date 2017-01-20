@@ -105,6 +105,7 @@ public class GameClient implements IObservator{
 			try {
 				System.out.println("turn changed");
 				gamePage.Toggle(player.hasTurn());
+				gamePage.refreshBoard();
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
