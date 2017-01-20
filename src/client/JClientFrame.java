@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import common.Board;
 import common.CouleurPion;
+import common.IPlayer;
 import common.PlayerImpl;
 import server.IGameNetwork;
 import javax.swing.JLabel;
@@ -76,6 +77,18 @@ public class JClientFrame extends JFrame {
 		contentPane.add(label_color, gbc_label_turn);
 		System.out.println("test");
 		setContentPane(contentPane);
+	}
+	
+	public void displayGameOver(IPlayer winner) throws RemoteException
+	{
+		String message = "";
+		if (winner == null)
+			message = "Match nul !";
+		else if (winner.getName() == player.getName())
+			message = "Vous avez gagné !";
+		else
+			message = "Vous avez perdu !";
+		javax.swing.JOptionPane.showMessageDialog(null,message); 
 	}
 
 	public void refreshBoard() throws RemoteException {

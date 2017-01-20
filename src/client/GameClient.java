@@ -105,6 +105,12 @@ public class GameClient implements IObservator{
 		return connect.getStub();
 	}
 
+	public void gameOver() throws RemoteException
+	{
+		IPlayer winner = connect.getStub().checkWinner();
+		gamePage.displayGameOver(winner);
+	}
+	
 	@Override
 	public void observableChanged(IObservable object) {
 		if (object.getClass() == PlayerImpl.class)
@@ -113,6 +119,10 @@ public class GameClient implements IObservator{
 				System.out.println("turn changed");
 				gamePage.Toggle(player.hasTurn());
 				gamePage.refreshBoard();
+				if (connect.getStub().isGameOver())
+				{
+					gameOver();
+				}
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
