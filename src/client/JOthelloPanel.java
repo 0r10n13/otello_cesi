@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import common.CouleurPion;
+import common.PlayerImpl;
 import javafx.scene.control.Tab;
 import javafx.scene.shape.Circle;
 import server.IGameNetwork;
@@ -24,6 +26,7 @@ import server.IGameNetwork;
 public class JOthelloPanel extends JPanel{
 
 	private IGameNetwork server;
+	private PlayerImpl player;
 
 	public void setServer(IGameNetwork server) {
 		this.server = server;
@@ -45,6 +48,13 @@ public class JOthelloPanel extends JPanel{
 			Point cell_coords=getCoordsCell(e.getX(), e.getY());
 			System.out.printf("Click at %s\n", cell_coords);
 			//server.setTokenAt(cell_coords.x, cell_coords.y);
+			boolean ajout_pion=	server.CheckPosition(cell_coords.x, cell_coords.y,player.getColor());
+			if (!ajout_pion)
+			{
+				//System.out.printf("Impossible de poser le pion");
+				javax.swing.JOptionPane.showMessageDialog(null,"Impossible de poser le pion"); 
+
+			}
 			invalidate();
 			repaint();
 		} catch (RemoteException e1) {
