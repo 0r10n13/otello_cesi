@@ -99,6 +99,7 @@ public class GameClient implements IObservator{
 
 	@Override
 	public void observableChanged(IObservable object) {
+		System.out.println("BIM !");
 		if (object.getClass() == IPlayer.class)
 		{
 			try {
