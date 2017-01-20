@@ -53,9 +53,12 @@ public class Game implements IGameNetwork {
 		}
 	}
 
-	public void startGame()
+	public void startGame() throws RemoteException
 	{
 		over = false;
+		players.get(0).setTurn(true);
+		players.get(1).setTurn(false);
+		endTurn();
 		board.InitStartBoard(players);
 	}
 	
@@ -126,6 +129,7 @@ public class Game implements IGameNetwork {
 			return false;
 		}
 		
+		endTurn();
 		return true;
 	}
 

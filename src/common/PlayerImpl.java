@@ -31,6 +31,7 @@ public class PlayerImpl implements IPlayer{
 		return turn;
 	}
 	
+	@Override
 	public void setTurn(boolean val)
 	{
 		turn = val;
@@ -52,7 +53,7 @@ public class PlayerImpl implements IPlayer{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
 	public void notifyObservers() {
 		for (IObservator item : observers)

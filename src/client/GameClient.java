@@ -103,6 +103,7 @@ public class GameClient implements IObservator{
 		if (object.getClass() == IPlayer.class)
 		{
 			try {
+				System.out.println("turn changed");
 				gamePage.Toggle(player.hasTurn());
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
