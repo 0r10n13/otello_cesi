@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import common.PlayerImpl;
 import server.IGameNetwork;
 
 public class JClientFrame extends JFrame {
@@ -142,5 +143,9 @@ public class JClientFrame extends JFrame {
 	public void setServer(IGameNetwork stub) {
 		panel.setServer(stub);
 		internRefreshBoard();
+	}
+	public void SetPlayer(PlayerImpl player)
+	{
+		panel.SetPlayer(player);
 	}
 }

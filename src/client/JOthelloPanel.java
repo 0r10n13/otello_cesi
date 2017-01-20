@@ -31,6 +31,12 @@ public class JOthelloPanel extends JPanel{
 	public void setServer(IGameNetwork server) {
 		this.server = server;
 	}
+	
+	public void SetPlayer(PlayerImpl player)
+	{
+		this.player= player;
+	}
+
 	public JOthelloPanel() {
 		addMouseListener(new MouseAdapter() {
 			@Override
@@ -48,6 +54,9 @@ public class JOthelloPanel extends JPanel{
 			Point cell_coords=getCoordsCell(e.getX(), e.getY());
 			System.out.printf("Click at %s\n", cell_coords);
 			//server.setTokenAt(cell_coords.x, cell_coords.y);
+			//player = new PlayerImpl();
+			System.out.printf("Couleur %s\n", player.getColor());
+			
 			boolean ajout_pion=	server.CheckPosition(cell_coords.x, cell_coords.y,player.getColor());
 			if (!ajout_pion)
 			{

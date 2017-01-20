@@ -57,6 +57,7 @@ public class GameClient implements IObservator{
 		nameFrame.dispose();
 		gamePage = new JClientFrame();
 		gamePage.setServer(this.getServer());
+		gamePage.SetPlayer(this.player);
 		gamePage.setVisible(true);
 	}
 
