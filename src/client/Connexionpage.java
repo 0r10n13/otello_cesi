@@ -66,7 +66,6 @@ public class Connexionpage extends JFrame {
 				String ipToConnect=getTextField().getText();
 				try {
 					gameClient.setUrl(ipToConnect);
-					gameClient.displayAddPlayer();
 				}
 				catch(Exception e1)
 				{
