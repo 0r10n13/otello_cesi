@@ -72,22 +72,28 @@ public class Game implements IGameNetwork {
 		return true;
 	}
 	
-//	public IPlayer checkWinner()
-//	{
-//		int black, white = 0;
-//		IPlayer winner = null;
-//		try {
-//			black = board.getNumberPion(CouleurPion.NOIR);
-//			white = board.getNumberPion(CouleurPion.BLANC);
-//		} catch (RemoteException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		if (black > white)
-//		{
-//			
-//		}
-//	}
+	public IPlayer checkWinner() throws RemoteException
+	{
+		int black = 0, white = 0;
+		IPlayer winner = null;
+		try {
+			black = board.getNumberPion(CouleurPion.NOIR);
+			white = board.getNumberPion(CouleurPion.BLANC);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (black > white)
+		{
+			winner = (players.get(0).getColor() == CouleurPion.NOIR) ? players.get(0) : players.get(1);
+		}
+		else
+		{
+			winner = (players.get(0).getColor() == CouleurPion.BLANC) ? players.get(0) : players.get(1);
+		}
+		
+		return winner;
+	}
 	
 	public void endTurn()
 	{
