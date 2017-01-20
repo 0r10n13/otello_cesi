@@ -76,16 +76,19 @@ public class Board {
 	// couleur des pions dans le cas contraire
 	public boolean IsPositionAuthorised(int x, int y, CouleurPion couleur) throws RemoteException {
 
+		IPlayer player = null;
+
 		// gauche
-		Pion left = board[x - 1][y];
+		Pion left = (x - 1 >= 0) ? board[x - 1][y] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (left != null && left.getPlayer().getColor() != couleur) {
-
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x - 1 - i][y] != null && board[x - 1 - i][y].getPlayer().getColor() == couleur) {
+				if ((x - 1 - i >= 0) && board[x - 1 - i][y] != null
+						&& board[x - 1 - i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x - 1 - j][y].getPlayer();
 						board[x - 1 - j][y].getPlayer().setColor(couleur);
 					}
 					break;
@@ -94,16 +97,17 @@ public class Board {
 		}
 
 		// gauche/haut
-		Pion leftUp = board[x - 1][y - 1];
+		Pion leftUp = (x - 1 >= 0 && y - 1 >= 0) ? board[x - 1][y - 1] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (leftUp != null && leftUp.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x - 1 - i][y - 1 - i] != null
+				if ((x - 1 - i >= 0 && y - 1 - i >= 0) && board[x - 1 - i][y - 1 - i] != null
 						&& board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x - 1 - j][y - 1 - j].getPlayer();
 						board[x - 1 - j][y - 1 - j].getPlayer().setColor(couleur);
 					}
 					break;
@@ -112,15 +116,17 @@ public class Board {
 		}
 
 		// haut
-		Pion up = board[x][y - 1];
+		Pion up = (y - 1 >= 0) ? board[x][y - 1] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (up != null && up.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x][y - 1 - i] != null && board[x][y - 1 - i].getPlayer().getColor() == couleur) {
+				if ((y - 1 - i >= 0) && board[x][y - 1 - i] != null
+						&& board[x][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x][y - 1 - j].getPlayer();
 						board[x][y - 1 - j].getPlayer().setColor(couleur);
 					}
 					break;
@@ -129,16 +135,17 @@ public class Board {
 		}
 
 		// droite/haut
-		Pion rightUp = board[x + 1][y - 1];
+		Pion rightUp = (x + 1 <= 7) && (y - 1 >= 0) ? board[x + 1][y - 1] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (rightUp != null && rightUp.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x + 1 + i][y - 1 - i] != null
+				if ((x + 1 + i <= 7 && y - 1 - i >= 0) && board[x + 1 + i][y - 1 - i] != null
 						&& board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x + 1 + j][y - 1 - j].getPlayer();
 						board[x + 1 + j][y - 1 - j].getPlayer().setColor(couleur);
 					}
 					break;
@@ -147,15 +154,17 @@ public class Board {
 		}
 
 		// droite
-		Pion right = board[x + 1][y];
+		Pion right = (x + 1 <= 7) ? board[x + 1][y] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (right != null && right.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x + 1 + i][y] != null && board[x + 1 + i][y].getPlayer().getColor() == couleur) {
+				if ((x + 1 + i <= 7) && board[x + 1 + i][y] != null
+						&& board[x + 1 + i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x + 1 + j][y].getPlayer();
 						board[x + 1 + j][y].getPlayer().setColor(couleur);
 					}
 					break;
@@ -164,16 +173,17 @@ public class Board {
 		}
 
 		// droite/bas
-		Pion rightDown = board[x + 1][y + 1];
+		Pion rightDown = (x + 1 <= 7) && (y + 1 <= 7) ? board[x + 1][y + 1] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (rightDown != null && rightDown.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x + 1 + i][y + 1 + i] != null
+				if ((x + 1 + i <= 7 && y + 1 + i <= 7) && board[x + 1 + i][y + 1 + i] != null
 						&& board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x + 1 + j][y + 1 + j].getPlayer();
 						board[x + 1 + j][y + 1 + j].getPlayer().setColor(couleur);
 					}
 					break;
@@ -182,15 +192,17 @@ public class Board {
 		}
 
 		// bas
-		Pion down = board[x][y + 1];
+		Pion down = (y + 1 <= 7) ? board[x][y + 1] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (down != null && down.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x][y + 1 + i] != null && board[x][y + 1 + i].getPlayer().getColor() == couleur) {
+				if ((y + 1 + i <= 7) && board[x][y + 1 + i] != null
+						&& board[x][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x][y + 1 + j].getPlayer();
 						board[x][y + 1 + j].getPlayer().setColor(couleur);
 					}
 					break;
@@ -199,16 +211,17 @@ public class Board {
 		}
 
 		// gauche/bas
-		Pion leftDown = board[x - 1][y + 1];
+		Pion leftDown = (x - 1 >= 0) && (y + 1 <= 7) ? board[x - 1][y + 1] : null;
 		// si pion prï¿½sent et de couleur diffï¿½rente, on continue
 		if (leftDown != null && leftDown.getPlayer().getColor() != couleur) {
 
 			// si aprï¿½s le premier pion, un autre pion de la couleur du joueur
 			// est trouvï¿½, on arrï¿½te, on sais que la position est valide
 			for (int i = 0; i < 8; i++) {
-				if (board[x - 1 - i][y + 1 + i] != null
+				if ((x - 1 - i >= 0 && y + 1 + i <= 7) && board[x - 1 - i][y + 1 + i] != null
 						&& board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
+						player = board[x - 1 - j][y + 1 + j].getPlayer();
 						board[x - 1 - j][y + 1 + j].getPlayer().setColor(couleur);
 					}
 					break;
@@ -233,6 +246,18 @@ public class Board {
 				&& leftDown != null && leftDown.getPlayer().getColor() == couleur) {
 			System.out.println("position entourï¿½e de votre couleur");
 			return false;
+		}
+
+		// si player n'a pas été renseigné c'est qu'aucune pièce n'a été
+		// modifiée => placement merdique
+		if (player == null) {
+			return false;
+		}
+
+		// si aucune erreur de levé, on peux ajouter un pion à l'endroit cliqué
+		if (player != null) {
+			board[x][y] = new Pion();
+			board[x][y].setPlayer(player);
 		}
 
 		return true;
