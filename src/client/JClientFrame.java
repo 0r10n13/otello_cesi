@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import common.CouleurPion;
 import common.PlayerImpl;
 import server.IGameNetwork;
 import javax.swing.JLabel;
@@ -53,20 +54,6 @@ public class JClientFrame extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel label_turn = new JLabel("Turn");
-		GridBagConstraints gbc_label_turn = new GridBagConstraints();
-		gbc_label_turn.insets = new Insets(0, 0, 5, 5);
-		gbc_label_turn.gridx = 0;
-		gbc_label_turn.gridy = 0;
-		contentPane.add(label_turn, gbc_label_turn);
-		
-		JLabel label_nameplayer = new JLabel("New label");
-		GridBagConstraints gbc_label_nameplayer = new GridBagConstraints();
-		gbc_label_nameplayer.insets = new Insets(0, 0, 5, 0);
-		gbc_label_nameplayer.gridx = 1;
-		gbc_label_nameplayer.gridy = 0;
-		contentPane.add(label_nameplayer, gbc_label_nameplayer);
-		
 		panel = new JOthelloPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.gridwidth = 2;
@@ -79,17 +66,22 @@ public class JClientFrame extends JFrame {
 	public JOthelloPanel getOthelloPanel() {
 		return panel;
 	}
-	
-	//public void setServer(OthelloServer server_p) {
-	//	server=server_p;
-		//getOthelloPanel().setServer(server_p);
-	//}
 
 	public JTextField getJtfUserName() {
 		//return jtfUserName;
 		return null;
 	}
-
+	
+	public void setColorName(String color)
+	{
+		JLabel label_color = new JLabel("Vous êtes "+color);
+		GridBagConstraints gbc_label_turn = new GridBagConstraints();
+		gbc_label_turn.insets = new Insets(0, 0, 5, 5);
+		gbc_label_turn.gridx = 0;
+		gbc_label_turn.gridy = 0;
+		contentPane.add(label_color, gbc_label_turn);System.out.println("test");
+		setContentPane(contentPane);
+	}
 
 	public void refreshBoard() throws RemoteException {
 		internRefreshBoard();
@@ -104,16 +96,6 @@ public class JClientFrame extends JFrame {
 	public String getPlayerName() throws RemoteException {
 		return panel.getName();
 	}
-
-
-/*	public void setColor(TokenColor color_p) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}*/
-
-	/*public void setName(String name){
-		label_nameplayer.setText(name);
-	}*/
 	
 	public void Toggle(boolean etat) throws RemoteException {
 		if (etat==true){

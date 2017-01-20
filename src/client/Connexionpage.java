@@ -80,17 +80,6 @@ public class Connexionpage extends JFrame {
 		gbc_btnAjouter.gridx = 1;
 		gbc_btnAjouter.gridy = 2;
 		contentPane.add(btnAjouter, gbc_btnAjouter);
-		
-		JButton btnNewButton = new JButton("Suivant");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 5;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
 	
 	}
 

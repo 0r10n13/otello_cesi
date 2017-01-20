@@ -7,6 +7,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
 import server.IGameNetwork;
+import common.CouleurPion;
 import common.IObservable;
 import common.IObservator;
 import common.IPlayer;
@@ -69,6 +70,7 @@ public class GameClient implements IObservator{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("connexion impossible");
+			connectFrame.ErrorConnexion();
 		}
 	}
 
@@ -82,15 +84,20 @@ public class GameClient implements IObservator{
 			IPlayer stubPlayer =  (IPlayer) UnicastRemoteObject.exportObject(player, 0);
 			connect.getStub().addPlayer(stubPlayer);
 			System.out.println("adding player OK");
+			String color = (player.getColor() == CouleurPion.BLANC) ? "blanc" : "noir";
+			gamePage.setColorName(color);
 			displayGame();
 
 		} catch (TooManyPlayersException e) {
 			System.out.println(e);
+			nameFrame.ErrorAddPlayer();
 		} catch (UserExistsException e) {
 			System.out.println(e);
+			nameFrame.ErrorAddPlayer();
 		} catch (Exception e) {
 			System.out.println(e);
 			System.out.println(e.getStackTrace());
+			nameFrame.ErrorAddPlayer();
 		}
 	}
 
