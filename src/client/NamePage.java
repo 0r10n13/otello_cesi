@@ -47,6 +47,13 @@ public class NamePage extends JFrame{
 	public NamePage() {
 		initialize();
 	}
+	
+	public void ErrorConnexion (){
+		javax.swing.JOptionPane.showMessageDialog(null,"Erreur de connexion"); 
+	}
+	public void ErrorAddPlayer (){
+		javax.swing.JOptionPane.showMessageDialog(null,"Impossible de créer le joueur"); 
+	}
 
 	/**
 	 * Initialize the contents of the frame.
