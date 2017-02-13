@@ -68,7 +68,7 @@ public class Game implements IGameNetwork {
 		{
 			for (int y = 0; y < 8; y++)
 			{
-				if (CheckPosition(x, y, CouleurPion.NOIR) || CheckPosition(x, y, CouleurPion.BLANC))
+				if (CheckPosition(x, y, CouleurPion.NOIR, true) || CheckPosition(x, y, CouleurPion.BLANC, true))
 					return false;
 			}
 		}
@@ -117,7 +117,7 @@ public class Game implements IGameNetwork {
 	}
 
 	@Override
-	public boolean CheckPosition(int x, int y, CouleurPion couleur) throws RemoteException {
+	public boolean CheckPosition(int x, int y, CouleurPion couleur, boolean readOnly) throws RemoteException {
 		
 		//check si la case est vide
 		if (!board.IsPositionFree(x, y)){
@@ -133,13 +133,17 @@ public class Game implements IGameNetwork {
 			}
 		}
 		
-		if (!board.IsPositionAuthorised(x, y, current)){
+		if (!board.IsPositionAuthorised(x, y, current, readOnly)){
 			return false;
 		}
-		
-		endTurn();
+		if (!readOnly)
+		{
+			endTurn();
+		}
 		return true;
 	}
+	
+	
 
 	public static void main(String[] args) {
 		try {

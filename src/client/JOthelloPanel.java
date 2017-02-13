@@ -58,7 +58,7 @@ public class JOthelloPanel extends JPanel{
 			//player = new PlayerImpl();
 			System.out.printf("Couleur %s\n", player.getColor());
 			
-			boolean ajout_pion=	server.CheckPosition(cell_coords.x, cell_coords.y,player.getColor());
+			boolean ajout_pion=	server.CheckPosition(cell_coords.x, cell_coords.y,player.getColor(), false);
 			if (!ajout_pion)
 			{
 				//System.out.printf("Impossible de poser le pion");

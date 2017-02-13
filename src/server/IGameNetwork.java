@@ -13,5 +13,5 @@ public interface IGameNetwork extends Remote {
 
 	public CouleurPion[][] getBoardState() throws RemoteException;
 
-	public boolean CheckPosition(int x, int y, CouleurPion couleur) throws RemoteException;
+	public boolean CheckPosition(int x, int y, CouleurPion couleur, boolean readOnly) throws RemoteException;
 }

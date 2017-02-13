@@ -74,7 +74,7 @@ public class Board {
 
 	// retourne false si le placement demandï¿½ n'est pas possible et modifie la
 	// couleur des pions dans le cas contraire
-	public boolean IsPositionAuthorised(int x, int y, IPlayer current) throws RemoteException {
+	public boolean IsPositionAuthorised(int x, int y, IPlayer current, boolean readOnly) throws RemoteException {
 
 		CouleurPion couleur = current.getColor();
 		IPlayer player = null;
@@ -90,9 +90,11 @@ public class Board {
 						&& board[x - 1 - i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x - 1 - j][y].getPlayer();
-
-						board[x - 1 - j][y] = new Pion();
-						board[x - 1 - j][y].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x - 1 - j][y] = new Pion();
+							board[x - 1 - j][y].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -111,9 +113,11 @@ public class Board {
 						&& board[x - 1 - i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x - 1 - j][y - 1 - j].getPlayer();
-
-						board[x - 1 - j][y - 1 - j] = new Pion();
-						board[x - 1 - j][y - 1 - j].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x - 1 - j][y - 1 - j] = new Pion();
+							board[x - 1 - j][y - 1 - j].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -132,9 +136,11 @@ public class Board {
 						&& board[x][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x][y - 1 - j].getPlayer();
-
-						board[x][y - 1 - j] = new Pion();
-						board[x][y - 1 - j].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x][y - 1 - j] = new Pion();
+							board[x][y - 1 - j].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -153,9 +159,11 @@ public class Board {
 						&& board[x + 1 + i][y - 1 - i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x + 1 + j][y - 1 - j].getPlayer();
-
-						board[x + 1 + j][y - 1 - j] = new Pion();
-						board[x + 1 + j][y - 1 - j].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x + 1 + j][y - 1 - j] = new Pion();
+							board[x + 1 + j][y - 1 - j].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -174,9 +182,11 @@ public class Board {
 						&& board[x + 1 + i][y].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x + 1 + j][y].getPlayer();
-
-						board[x + 1 + j][y] = new Pion();
-						board[x + 1 + j][y].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x + 1 + j][y] = new Pion();
+							board[x + 1 + j][y].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -195,9 +205,11 @@ public class Board {
 						&& board[x + 1 + i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x + 1 + j][y + 1 + j].getPlayer();
-
-						board[x + 1 + j][y + 1 + j] = new Pion();
-						board[x + 1 + j][y + 1 + j].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x + 1 + j][y + 1 + j] = new Pion();
+							board[x + 1 + j][y + 1 + j].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -216,9 +228,11 @@ public class Board {
 						&& board[x][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x][y + 1 + j].getPlayer();
-
-						board[x][y + 1 + j] = new Pion();
-						board[x][y + 1 + j].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x][y + 1 + j] = new Pion();
+							board[x][y + 1 + j].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -237,9 +251,11 @@ public class Board {
 						&& board[x - 1 - i][y + 1 + i].getPlayer().getColor() == couleur) {
 					for (int j = 0; j < i; j++) {
 						player = board[x - 1 - j][y + 1 + j].getPlayer();
-
-						board[x - 1 - j][y + 1 + j] = new Pion();
-						board[x - 1 - j][y + 1 + j].setPlayer(current);
+						if (!readOnly)
+						{
+							board[x - 1 - j][y + 1 + j] = new Pion();
+							board[x - 1 - j][y + 1 + j].setPlayer(current);	
+						}
 					}
 					break;
 				}
@@ -265,14 +281,14 @@ public class Board {
 			return false;
 		}
 
-		// si player n'a pas été renseigné c'est qu'aucune pièce n'a été
-		// modifiée => placement merdique
+		// si player n'a pas ï¿½tï¿½ renseignï¿½ c'est qu'aucune piï¿½ce n'a ï¿½tï¿½
+		// modifiï¿½e => placement merdique
 		if (player == null) {
 			return false;
 		}
 
-		// si aucune erreur de levé, on peux ajouter un pion à l'endroit cliqué
-		if (player != null) {
+		// si aucune erreur de levï¿½, on peux ajouter un pion ï¿½ l'endroit cliquï¿½
+		if (player != null && !readOnly) {
 			board[x][y] = new Pion();
 			board[x][y].setPlayer(current);
 		}
