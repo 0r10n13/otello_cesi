@@ -82,7 +82,7 @@ public class JClientFrame extends JFrame {
 		GridBagConstraints gbc_label_turn = new GridBagConstraints();
 		gbc_label_turn.insets = new Insets(0, 0, 5, 5);
 		gbc_label_turn.gridx = 0;
-		gbc_label_turn.gridy = 0;
+		gbc_label_turn.gridy = 1;
 		contentPane.add(label_color, gbc_label_turn);
 		setContentPane(contentPane);
 	}

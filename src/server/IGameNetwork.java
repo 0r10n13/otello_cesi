@@ -20,4 +20,6 @@ public interface IGameNetwork extends Remote {
 	public IPlayer checkWinner() throws RemoteException;
 	
 	public int GetScoreByColor(CouleurPion couleur) throws RemoteException;
+	
+	public void AskStartGame() throws RemoteException;
 }

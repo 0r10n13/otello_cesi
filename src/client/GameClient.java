@@ -87,16 +87,16 @@ public class GameClient implements IObservator{
 			String color = (player.getColor() == CouleurPion.BLANC) ? "blanc" : "noir";
 			gamePage.setColorName(color);
 			displayGame();
+			connect.getStub().AskStartGame();
 
 		} catch (TooManyPlayersException e) {
-			System.out.println(e);
+			e.printStackTrace();
 			nameFrame.ErrorAddPlayer();
 		} catch (UserExistsException e) {
-			System.out.println(e);
+			e.printStackTrace();
 			nameFrame.ErrorAddPlayer();
 		} catch (Exception e) {
-			System.out.println(e);
-			System.out.println(e.getStackTrace());
+			e.printStackTrace();
 			nameFrame.ErrorAddPlayer();
 		}
 	}

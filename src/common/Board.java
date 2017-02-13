@@ -38,13 +38,23 @@ public class Board {
 		int count = 0;
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				if (board[x][y].getPlayer().getColor() == color) {
+				if (board[x][y] != null && board[x][y].getPlayer().getColor() == color) {
 					count++;
 				}
 			}
 		}
 
 		return count;
+	}
+	
+	public Pion[][] getOriginalBoard()
+	{
+		return board;
+	}
+	
+	public void setOriginalBoard(Pion[][] value)
+	{
+		this.board = value;
 	}
 
 	public CouleurPion[][] GetBoardState() throws RemoteException {
@@ -265,13 +275,13 @@ public class Board {
 			return false;
 		}
 
-		// si player n'a pas été renseigné c'est qu'aucune pièce n'a été
-		// modifiée => placement merdique
+		// si player n'a pas ï¿½tï¿½ renseignï¿½ c'est qu'aucune piï¿½ce n'a ï¿½tï¿½
+		// modifiï¿½e => placement merdique
 		if (player == null) {
 			return false;
 		}
 
-		// si aucune erreur de levé, on peux ajouter un pion à l'endroit cliqué
+		// si aucune erreur de levï¿½, on peux ajouter un pion ï¿½ l'endroit cliquï¿½
 		if (player != null) {
 			board[x][y] = new Pion();
 			board[x][y].setPlayer(current);

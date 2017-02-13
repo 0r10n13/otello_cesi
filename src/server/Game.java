@@ -11,6 +11,7 @@ import java.util.List;
 import common.Board;
 import common.CouleurPion;
 import common.IPlayer;
+import common.Pion;
 import common.TooManyPlayersException;
 import common.UserExistsException;
 
@@ -18,6 +19,7 @@ public class Game implements IGameNetwork {
 	List<IPlayer> players = new ArrayList<IPlayer>();
 	Board board = new Board();
 	boolean over;
+	int lastTurn;
 	
 	@Override
 	public int GetScoreByColor(CouleurPion couleur) throws RemoteException{
@@ -52,6 +54,11 @@ public class Game implements IGameNetwork {
 		// ajout du joueur
 		players.add(newPlayer);
 		System.out.println("added : " + newPlayer.getName());
+	}
+	
+	@Override
+	public void AskStartGame() throws RemoteException
+	{
 		if (players.size() == 2)
 		{
 			startGame();
@@ -63,21 +70,36 @@ public class Game implements IGameNetwork {
 		over = false;
 		players.get(0).setTurn(true);
 		players.get(1).setTurn(false);
-		endTurn();
+		lastTurn = 0;
 		board.InitStartBoard(players);
+		endTurn();
 	}
 	
-	public boolean isGameOver() throws RemoteException
+	public boolean checkGameOver() throws RemoteException
 	{
 		for (int x = 0; x < 8; x++)
 		{
 			for (int y = 0; y < 8; y++)
 			{
-				if (CheckPosition(x, y, CouleurPion.NOIR) || CheckPosition(x, y, CouleurPion.BLANC))
+				Pion[][] mem = board.getOriginalBoard();
+				boolean posNoir = CheckPosition(x, y, CouleurPion.NOIR);
+				board.setOriginalBoard(mem);
+				boolean posBlanc = CheckPosition(x, y, CouleurPion.BLANC);
+				board.setOriginalBoard(mem);
+				if (posNoir || posBlanc)
+				{
+					over = false;
 					return false;
+				}
 			}
 		}
+		over = true;
 		return true;
+	}
+	
+	public boolean isGameOver() throws RemoteException
+	{
+		return over;
 	}
 	
 	public IPlayer checkWinner() throws RemoteException
@@ -105,6 +127,12 @@ public class Game implements IGameNetwork {
 	
 	public void endTurn()
 	{
+		try {
+			checkGameOver();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		for (IPlayer item : players)
 		{
 			try {
@@ -114,6 +142,10 @@ public class Game implements IGameNetwork {
 				e.printStackTrace();
 			}
 		}
+		if (lastTurn == 0)
+			lastTurn = 1;
+		else
+			lastTurn = 0;
 	}
 	
 	@Override
@@ -137,12 +169,19 @@ public class Game implements IGameNetwork {
 				break;
 			}
 		}
-		
+		if (current == null)
+		{
+			if (lastTurn == 0)
+				current = players.get(1);
+			else
+				current = players.get(0);
+		}
+
 		if (!board.IsPositionAuthorised(x, y, current)){
 			return false;
 		}
 		
-		endTurn();
+		//endTurn();
 		return true;
 	}
 
