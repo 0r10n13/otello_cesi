@@ -265,7 +265,7 @@ public class Board {
 		// si toutes les positions autour sont vides
 		if (left == null && leftUp == null && up == null && rightUp == null && right == null && rightDown == null
 				&& down == null && leftDown == null) {
-			System.out.println("position entour�e de vide");
+			//System.out.println("position entour�e de vide");
 			return false;
 		}
 
@@ -277,7 +277,7 @@ public class Board {
 				&& right.getPlayer().getColor() == couleur && rightDown != null
 				&& rightDown.getPlayer().getColor() == couleur && down != null && down.getPlayer().getColor() == couleur
 				&& leftDown != null && leftDown.getPlayer().getColor() == couleur) {
-			System.out.println("position entour�e de votre couleur");
+			//System.out.println("position entour�e de votre couleur");
 			return false;
 		}
 

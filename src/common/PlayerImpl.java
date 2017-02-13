@@ -39,7 +39,7 @@ public class PlayerImpl implements IPlayer{
 	
 	public void changeTurn()
 	{
-		turn = !turn;
+		//turn = !turn;
 		notifyObservers();
 	}
 

@@ -58,8 +58,8 @@ public class Game implements IGameNetwork {
 		over = false;
 		players.get(0).setTurn(true);
 		players.get(1).setTurn(false);
-		endTurn();
 		board.InitStartBoard(players);
+		endTurn();
 	}
 	
 	public boolean isGameOver() throws RemoteException
@@ -98,8 +98,12 @@ public class Game implements IGameNetwork {
 		return winner;
 	}
 	
-	public void endTurn()
+	public void endTurn() throws RemoteException
 	{
+		for (IPlayer item : players)
+		{
+			item.setTurn(!item.hasTurn());
+		}
 		for (IPlayer item : players)
 		{
 			try {
@@ -132,10 +136,15 @@ public class Game implements IGameNetwork {
 				break;
 			}
 		}
-		
-		if (!board.IsPositionAuthorised(x, y, current, readOnly)){
-			return false;
+		try {
+			if (!board.IsPositionAuthorised(x, y, current, readOnly)){
+				return false;
+			}
+		}catch(Exception e)
+		{
+			e.printStackTrace();
 		}
+		
 		if (!readOnly)
 		{
 			endTurn();

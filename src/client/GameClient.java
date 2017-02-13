@@ -113,6 +113,12 @@ public class GameClient implements IObservator{
 				System.out.println("turn changed");
 				gamePage.Toggle(player.hasTurn());
 				gamePage.refreshBoard();
+				if (connect.getStub().isGameOver())
+				{
+					System.out.println("game over");
+					//gameOver();
+				}
+
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
